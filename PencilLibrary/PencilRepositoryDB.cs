@@ -9,10 +9,10 @@ namespace PencilLibrary
 {
 	public class PencilRepositoryDB : IPencilRepository
 	{
-		private readonly PencilsDBContext _context;
+		private readonly MannazRestAppsDbContext _context;
 		public int Count { get { return _context.Pencils.ToList().Count; } }
 
-		public PencilRepositoryDB(PencilsDBContext dbContext)
+		public PencilRepositoryDB(MannazRestAppsDbContext dbContext)
 		{
 			_context = dbContext;
 		}

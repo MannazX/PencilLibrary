@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace PencilLibrary
 {
-	public class PencilsDBContext : DbContext
+	public class MannazRestAppsDbContext : DbContext
 	{
 		// Install this: NuGet package Microsoft.EntityFrameworkCore.SqlServer
 
-		public PencilsDBContext(DbContextOptions<PencilsDBContext> options) : base(options)
+		public MannazRestAppsDbContext(DbContextOptions<MannazRestAppsDbContext> options) : base(options)
 		{
 			
 		}
