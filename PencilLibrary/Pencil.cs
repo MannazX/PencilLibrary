@@ -2,13 +2,8 @@
 {
     public class Pencil
     {
-		#region
-		private static int _counter = 0;
-		private int _pencilId;
-		#endregion
-
 		#region Properties
-		public int PencilId { get { return _pencilId; } }
+		public int PencilId { get; set; }
 		public string Type { get; set; }
 		public string Brand { get; set; }
 		public double Thickness { get; set; }
@@ -32,8 +27,6 @@
 			{
 				throw new ArgumentException("The length of the pencil may not exceed 15 cm");
 			}
-			_counter++;
-			_pencilId = _counter;
 			Type = type;
 			Brand = brand;
 			Thickness = thickness;
@@ -43,6 +36,22 @@
 		#endregion
 
 		#region Methods
+		public void Validate()
+		{
+			if (Brand.Length > 15)
+			{
+				throw new ArgumentException("The brand name may not exceed 15 characters");
+			}
+			if (Thickness > 2)
+			{
+				throw new ArgumentException("The thickness may not exceed 2 cm");
+			}
+			if (Length > 15)
+			{
+				throw new ArgumentException("The length of the pencil may not exceed 15 cm");
+			}
+		}
+
 		public override string ToString()
 		{
 			return $"Type: {Type}\nBrand: {Brand}\nThickness: {Thickness}\nLength: {Length}\nPrice: {Price}";

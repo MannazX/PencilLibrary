@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PencilLibrary
 {
-	public class PencilRepository
+	public class PencilRepository : IPencilRepository
 	{
 		#region Instance Fields
 		private List<Pencil> _pencils = new List<Pencil>();
@@ -73,7 +73,7 @@ namespace PencilLibrary
 			return _pencils;
 		}
 
-		public List<Pencil> Get(string? type, string? brand, double? thickness, double? length, double? price, string? sortBy)
+		public IEnumerable<Pencil> Get(string? type, string? brand, double? thickness, double? length, double? price, string? sortBy)
 		{
 			if (type != null)
 			{
