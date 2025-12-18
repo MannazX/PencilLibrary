@@ -9,7 +9,7 @@ namespace PencilLibrary
 	public class PencilRepository : IPencilRepository
 	{
 		#region Instance Fields
-		private List<Pencil> _pencils = new List<Pencil>();
+		private List<Pencil> _pencils;
 		#endregion
 
 		#region Properties
@@ -19,8 +19,7 @@ namespace PencilLibrary
 		#region Constructor
 		public PencilRepository()
 		{
-			_pencils.Add(new Pencil("HB", "Crayola", 1.8, 12.5, 25));
-			_pencils.Add(new Pencil("B", "Faber-Castell", 1.5, 12.5, 30));
+			_pencils = new List<Pencil>();
 		}
 
 		#endregion
@@ -28,6 +27,7 @@ namespace PencilLibrary
 		#region Methods
 		public Pencil Add(Pencil pencil)
 		{
+			pencil.PencilId = _pencils.Count + 1;
 			_pencils.Add(pencil);
 			return pencil;
 		}
@@ -45,14 +45,17 @@ namespace PencilLibrary
 		public Pencil Update(int id, Pencil pencilData)
 		{
 			Pencil item = GetById(id);
-			Pencil newItem = item;
-			newItem.Type = pencilData.Type;
-			newItem.Brand = pencilData.Brand;
-			newItem.Thickness = pencilData.Thickness;
-			newItem.Length = pencilData.Length;
-			newItem.Price = pencilData.Price;
-			_pencils[_pencils.IndexOf(item)] = newItem;
-			return pencilData;
+			if (item != null)
+			{
+				item.Type = pencilData.Type;
+				item.Thickness = pencilData.Thickness;
+				item.Brand = pencilData.Brand;
+				item.Length = pencilData.Length;
+				item.Price = pencilData.Price;
+				_pencils[_pencils.IndexOf(item)] = item;
+				return pencilData;
+			}
+			return null;
 		}
 
 		public Pencil GetById(int id)

@@ -1,0 +1,8 @@
+﻿CREATE TABLE Pencils (
+	PencilID INT IDENTITY(1,1) PRIMARY KEY,
+	Type VARCHAR(2) NOT NULL,
+	Brand VARCHAR(20) NOT NULL,
+	Thickness FLOAT NULL,
+	Length FLOAT NULL,
+	Price FLOAT NULL
+);

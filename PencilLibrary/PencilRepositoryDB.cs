@@ -10,7 +10,6 @@ namespace PencilLibrary
 	public class PencilRepositoryDB : IPencilRepository
 	{
 		private readonly MannazRestAppsDbContext _context;
-		public int Count { get { return _context.Pencils.ToList().Count; } }
 
 		public PencilRepositoryDB(MannazRestAppsDbContext dbContext)
 		{
@@ -19,7 +18,6 @@ namespace PencilLibrary
 
 		public Pencil Add(Pencil pencil)
 		{
-			pencil.Validate();
 			pencil.PencilId = 0;
 			_context.Pencils.Add(pencil);
 			_context.SaveChanges();
@@ -34,10 +32,11 @@ namespace PencilLibrary
 				return null;
 			}
 			_context.Pencils.Remove(pencil);
+			_context.SaveChanges();
 			return pencil;
 		}
 
-		public IEnumerable<Pencil> Get(string? type, string? brand, double? thickness, double? length, double? price, string? sortBy)
+		public IEnumerable<Pencil> Get(string type, string brand, double? thickness = null, double? length = null, double? price = null, string? sortBy = null)
 		{
 			IQueryable<Pencil> query = _context.Pencils.ToList().AsQueryable();
 			if (type != null)
@@ -102,7 +101,6 @@ namespace PencilLibrary
 
 		public Pencil? Update(int id, Pencil pencilData)
 		{
-			pencilData.Validate();
 			Pencil? pencil = GetById(id);
 			if (pencil == null)
 			{
